@@ -1,0 +1,190 @@
+HTTP - Hyper Text Markyup Language
+
+-It is stateless
+
+HTTPS ? - It stands for Hyper Text Transfer Protocol Secure
+Data sent is encypted.
+
+
+HTTP METHODS
+
+1> GET - Retrieves data from the server
+2> POST - Submit data to the server 
+3> PUT - Update data already on the server
+4> DELETE - Deletes data from the server
+
+HTTP HEADER FILES :-
+
+1) General: 1] Request URL
+	    2] Request Method
+	    3] Status Code
+	    4] Request Address
+	    5] Referrer Policy
+
+2) Response: 1] Server
+	     2] Set- Cookie 
+	     3] Content-Type
+	     4] Content-Length
+	     5] Date
+
+3) Request:  1] Cookies
+	     2] Accept-xxx
+	     3] Content-Type
+	     4] Content-Length
+	     5] Authorization
+	     6] User-Agent
+	     7] Referrer
+
+Client sends the request to server using TCP/IP based protocol (Internet) and then the server in return sends back the response.
+
+HTTP message consist of three parts:- 
+
+-----Start Line------
+-------Headers-------
+--------Body---------
+
+Start Line consist of 3 Parts  - Method
+	                                         - URL
+                                   		      - HTTP Version
+
+___________________________________________________________________________________
+				
+To create local server: http.ListenAndServe(":8080", http.HandlerFunc(handler))
+                  : This function takes 2 Parameters - First One is the port on which it will be 
+			                                                      present, Second One is the functional handler. 	 
+
+To handle a particular URL we use:
+	         : http.Handle("/hello", new(countHandler))
+                  : http.HandleFunc("/hello", h2)
+         **:-  The first parameter is the closing part of the URL.  "http://localhost:8080/hello"
+             :- The second parameter is the handler for the first parameter.
+    
+-----------------------------------------------------------------------------
+To access the data of a particular URL we use :-  http.Get("--url--")
+To read the data of the URL we use 	    	      :-  ioutil.ReadAll(//nameOfFile.body)
+
+________________________________________________________________________________________
+
+
+In Go, the Handle function and Handler interface are used together to handle HTTP requests
+ on an HTTP server. Here's how you can use them:
+
+1>Define a handler function or create a custom handler type that implements the http.Handler interface:  
+    
+                      // Handler function
+		func helloHandler(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprint(w, "Hello, World!")
+		}
+
+		// Custom handler type
+		type CustomHandler struct{}
+
+		func (h CustomHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "Custom Handler")
+		}
+
+2>Register the handler function or custom handler type using the Handle function:
+
+		func main() {
+	// Registering handler function
+	http.Handle("/hello", http.HandlerFunc(helloHandler))
+
+	// Registering custom handler type
+	http.Handle("/custom", CustomHandler{})
+
+	// Start the server on port 8080
+	http.ListenAndServe(":8080", nil)
+}		
+------------------------------------------------------------------------------------------------
+
+func main() {
+
+	http.Handle("/Hello", http.HandlerFunc(HelloHandler))
+
+	http.Handle("/Data", http.HandlerFunc(DataHandler))
+
+	http.Handle("/", http.HandlerFunc(IndexHandler))
+
+	port := ":5000"
+	fmt.Println("Server is running on port" + port)
+
+	http.ListenAndServe(port, nil)
+
+}
+
+func DataHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Data")
+}
+
+func HelloHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hellooo!!")
+}
+
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	http.FileServer(http.Dir("static"))
+}
+
+Your Directory Should be like :-
+
+project/
+├── main.go
+└── static/
+    └── index.html
+
+____________________________________________________________________________________________________
+Let’s say you were building a weather web app, for example. The weather app that your user is going to interact with is the client application – it has buttons, a search bar, and displays data like city name, current temperature, AQI, and so on.
+
+This weather app wouldn’t have every city and its weather information coded directly into it. This would make the app bloated and slow, would take forever to research and manually add to a database, and would be a headache to update every single day.
+
+Instead, the app can access weather data by city using the Weather web API. Your app would gather your user’s location and then make a request to the server saying, “Hey, send me the weather information for this specific city.”
+
+Depending on what you are trying to achieve, you would use the various request methods that are available. The server sends back a response containing the weather information and a few other things, depending on how the API is written. It may also send back things like a timestamp, the region this city is located in, and more.
+
+Your client application communicated with a server application running somewhere, whose only job is to listen continuously for a request to that address. When it receives a request, it works to fulfill that request either by reading from a database, another API, local file, or a programmatic calculation based on data you pass in.
+
+In the weather app example above, we wanted to retrieve weather information about a city. But what if we wanted to submit weather information for a city?
+
+In real life, you probably wouldn’t have permissions to alter someone else’s data, but let’s imagine that we are contributors to a community-run weather app. And in addition to getting the weather information from an API, members in that city could update this information to display more accurate data.
+
+Or what if we wanted to add a new city altogether that, for some reason, doesn’t already exist in our database of cities? These are all different functions – retrieve data, update data, create new data – and there are HTTP methods for all of these.
+
+---------------------------------------------------------------------------------------------------------------------
+
+HTTP POST request :-- We use POST to create a new resource. A POST request requires a body in which you define the data of the entity to be created.
+
+HTTP PUT request :-- We use PUT to modify a resource. PUT updates the entire resource with data that is passed in the body payload. If there is no resource that matches the request, it will create a new resource.
+
+HTTP PATCH request :-- We use PATCH to modify a part of a resource. With PATCH, you only need to pass in the data that you want to update.
+
+HTTP DELETE request :-- We use DELETE to delete a resource. In our weather app, we could use DELETE to delete a city we no longer wanted to track for some reason.
+
+Q] What’s the difference between PUT and PATCH?
+-> The key differences are that PUT will create a new resource if it cannot find the specified resource. And with PUT you need to pass in data to update the entire resource, even if you only want to modify one field.
+With PATCH, you can update part of a resource by simply passing in the data of the field to be updated.
+
+Q] What’s the difference between PUT and POST?
+PUT requests are idempotent, meaning that executing the same PUT request will always produce the same result. On the other hand, a POST will produce different outcomes. If you execute a POST request multiple times, you'll create a new resource multiple times despite them having the same data being passed in.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

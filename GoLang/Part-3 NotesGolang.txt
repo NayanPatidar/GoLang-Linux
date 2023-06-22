@@ -1,0 +1,104 @@
+---------------------------------------------------------------------------
+                                    Errors
+
+func calcRemainderAndMod( numerator, denominator int )( int , int , error)
+
+if denominator == 0 {
+  return 0, 0, errors.New("denominator is 0")
+}
+return numerator / denominator , numerator % denomiantor , nil
+}
+
+:- Go doesn't have special construct to detect errors. The only way to do this
+ is using an if statement.
+
+func main() {
+     numerator := 20
+     denominator := 3
+     remainder, mod, err := calcRemainderAndMod(numerator, denominator)
+     if err != nil {
+        fmt.Println(err)
+        os.Exit(1)
+     }
+}
+
+---------------------------------------------------------------------------
+                       Use Strings for Simple Errors
+  
+This string is returned when you call the Error method on the returned error instance.
+
+func doubleEven (i int) (int, error) {
+     if i % 2 != 0 {
+        return 0, errors.New("Only even numbers are processed ")  
+     }
+     return i*2, nil
+}
+
+Like errors.New, this stringis returned when you call the Error method on the returned error instance:
+
+is returned when you call the Error method on the returned error instance:
+
+  func doubleEven(i int) (int, error) {
+   if i % 2 != 0 {
+   return 0, fmt.Errorf("%d isn't an even number", i)
+   }
+  return i * 2, nil
+}
+
+------------------------------------------------------------------------------------------
+                                        Concurrency in Go
+
+:-Process = It is an instance of a program that’s being run by a computer’s operating system.
+The operating system associates some resources, such as memory, with the process and makes sure that
+other processes can’t access them. A process is composed of one or more threads.
+
+CHANNELS -> GoRoutines communicate using channels. It is an built-in type created using the make function:
+
+ch := make(chan int)
+
+a := <-ch  // read the value from ch and assigns it to a
+ch <- b    // write the value in b to ch
+
+FOR-RANGE AND CHANNELS ->
+
+You can also read from a channel using a for-range loop:
+for v := range ch {
+ fmt.Println(v)
+}                   
+  
+CLOSING A CHANNEL -> close(ch)
+
+
+select {
+
+case v := <-ch:
+     fmt.Println(v)
+case v := <-ch2:
+     fmt.Println(v)
+case ch3 <- x:
+     fmt.Println("wrote", x)
+case <-ch4:
+     fmt.Println("got value on ch4, but ignored it")
+
+}
+--------------------------------------------------------------------------------------
+
+Use keyword " go " for running a function parallely.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

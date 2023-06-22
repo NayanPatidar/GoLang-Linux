@@ -1,0 +1,74 @@
+----------------------------------------------------------------------------------
+                               The Standard Library
+
+io and Friends :- For a program to be useful, it needs to read in and write out data.
+Two most used interfaces in Go -> io.Reader and io.Writer
+
+type Reader interface {
+    Reader(p []byte) (n int, err error)
+}
+
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+
+
+Other libraries for closing and opening files can be found in 'io' package. 
+----------------------------------------------------------------------------------
+	    			     Time Package 
+
+Two most used time format is time.Duration and Time.Time  	
+
+----------------------------------------------------------------------------------
+                           Use Struct Tags to Add Metadata
+
+Lets say you want to create the following JSON:
+
+{
+ "id":"12345",
+ "date_ordered":"2020-05-01T13:01:02Z",
+ "customer_id":"3",
+ "items":[{"id":"xyz123","name":"Thing 1"},{"id":"abc789","name":"Thing 2"}]
+}
+
+---------------------------------------------------------------------------------
+                                Creating Files 
+
+	fmt.Println("Welcome to creating files in golang")
+	content := "This needs to go to file myFile.txt"
+
+	file, err := os.Create("./myFile.txt")
+
+	if err != nil {
+		panic(err)
+	}
+
+	length, err := io.WriteString(file, content)
+
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("length is: ", length)
+	file.Close()
+
+---------------------------------------------------------------------------        			
+						Marhsal and Unmarshal
+
+Marshal :- In Go, the term "Marshal" refers to the process of converting Go data structures (such as structs, slices, maps, etc.) into a serialized format, typically JSON, XML, or binary data. It is a way to transform complex Go objects into a representation that can be transmitted or stored.
+
+Unmarshal :- In Go, the term "Unmarshal" refers to the process of converting a serialized format, such as JSON, XML, or binary data, into Go data structures. It is the opposite of marshaling, where data is transformed from a serialized format into native Go types.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

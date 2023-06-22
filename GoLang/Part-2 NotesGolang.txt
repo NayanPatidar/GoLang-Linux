@@ -1,0 +1,198 @@
+----------------------------------------------------          
+                Shadowing Variables
+
+x := 10
+if x > 5 {
+    fmt.Println(x)  // Prints 10 
+    x := 5          // Shadowing variable
+    fmt.Println(x)  // Prints 5 
+   }
+   fmt.Println(x)   // Prints 10 again!!!
+
+A shadowing variable is a variable that has the same name as a variable in a 
+containing block.
+
+----------------------------------------------------
+                   if statement
+
+	if n := rand.Intn(10); n == 0 {
+		fmt.Println("That's too low")
+	}else if n > 5{
+		fmt.Println("That's too big: " , n)
+	}else{
+		fmt.Println("That's a good number:" , n )
+	}
+
+
+----------------------------------------------------
+                for, In Four Ways
+
+1> Complete C-Style for loop:-
+  
+   for i := 0; i < 10; i++{
+       fmt.Println(i)
+   }
+
+2> A condition-only for:-
+   
+   i := 1
+   for i < 100 {
+       fmt.Println(i)  
+       i = i*2
+   }
+
+3> An infinite for:-
+
+   for  {
+      fmt.Println("Hello")  
+   }
+ 
+4> for-range
+  
+  evenVals := []int{2, 4, 6, 8, 10, 12}
+  for _, v := range evenVals {
+  fmt.Println(v)
+  }
+
+-------------------------------------------------------------
+                          Switch 
+
+num := 3
+switch val := num; val{
+	case 1, 2:
+		fmt.Println(num, " is a short num")
+		break
+	case 3:
+		fmt.Println(num, " is exactly the right length ")
+		break
+	case 4, 5:
+		fmt.Println(num, " is a long num")
+		break
+	}
+  
+-------------------------------------------------------------
+                         Functions
+
+A function declaration has four parts: the keyword func, the name of the function, 
+the input parameters, and the return type.
+
+
+func div(numerator int, denominator int) int {
+   if denominator == 0 {
+       return 0
+   }
+   return numerator/ denominator
+}
+
+-------------------------------------------------------------
+             Simulating Named and Optional Parameters
+
+func main() {                 // Main function
+	MyFunc(data{
+		FirstName: "Nayan",
+		Age:       17,
+		LastName:  "Patidar",
+	})
+}
+
+func MyFunc(person data) {   // Function
+
+}
+
+type data struct {    //Struct
+	FirstName string
+	LastName  string
+	Age       int
+}
+
+-------------------------------------------------------------------------
+                       Multiple Return Values
+
+func divAndRemainder(numerator int, denominator int) (int, int, error) {
+      if denominator == 0 {
+      return 0, 0, errors.New("cannot divide by zero")
+      }
+  return numerator / denominator, numerator % denominator, nil
+}
+
+-------------------------------------------------------------------------
+                             Pointers
+
+         myNumber := 23
+         ptr := &myNumber
+		fmt.Println("Pointer to the variable", ptr)
+		fmt.Println("Value of the pointer", *ptr)
+                        
+
+*** so to access the address of the pointer we use the symbol '&' or we call it as referencing. 
+    to get the value at that particular pointer we use dereferencing or use the symbol '*'
+
+-------------------------------------------------------------------------
+                                 Types in Go
+type Score int 
+type Converter func(string)Score
+type TeamScores map[string]Score
+
+-------------------------------------------------------------------------
+                                  Methods
+
+Method declarations look just like function declarations, with one addition: the
+receiver specification. The receiver appears between the keyword func and the name
+of the method.
+
+func (p Person) String() {
+    fmt.Printf("%s %s, age %d", p.FirstName, p.LastName, p.Age)
+}
+
+
+-------------------------------------------------------------------------
+                 Pointer Receivers and Value Receivers
+
+type Counter struct {                                                   // Name of Struct is Counter
+ total int
+ lastUpdated time.Time
+}
+
+func (c *Counter) Increment() {                                         // Name of function is Increment
+ c.total++
+ c.lastUpdated = time.Now()
+}
+
+func (c Counter) Value() string {                                         // Name of function is Value
+ return fmt.Sprintf("total: %d, last updated: %v", c.total, c.lastUpdated)
+}
+
+func main(){
+   var a Counter                 // Creating variable a of struct Counter
+   fmt.Println(a.Value())
+   a.Increment()
+   fmt.Println(a.Value())
+}
+
+-------------------------------------------------------------------
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

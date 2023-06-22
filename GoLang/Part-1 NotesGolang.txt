@@ -1,0 +1,168 @@
+So, to run GoLang you need to run the cmd :- go run filename.go
+
+Basic program layout starts like :-
+
+---------------------------------------
+
+package main 
+import "fmt"
+
+func main() {
+   fmt.Println("Hello World!!")
+}
+
+---------------------------------------
+
+1. Semicolon are not required.
+
+Booleans :- 1> var flag bool // no value assigned .. default value set to false
+            2> var isAwesome = true 
+
+ -------- var VERSUS := --------- 
+
+Go has lot of ways to declare variables.
+
+var x int = 10 
+var x = 10
+c := 10 
+
+// All Three are acceptable
+
+2. " := " is not acceptable outside functions.
+
+---------------- const ------------------
+
+const (
+   idKey = "id"
+   nameKey = "name"
+)
+
+These variables once declared cannot be changed.
+
+
+----------------Arrays( Rarely used )-----------------
+
+var x = [3]int { 10,20,30 }
+Generally we don't use them as we don't know to length of the data structure.
+
+------------------ Slice -------------------------
+
+Most of the time when you hold a data structure that holds a sequence of values
+a slice is what you should use.	What makes it useful is that length is not part of  the type for a slice. 
+
+var x = []int {2 , 4 , 6}
+
+---------------------------------------------------
+
+             IN BUILT FUNCTIONS
+
+len - Used to find the length of the slice 
+
+append - this function takes two values , first is the slice and another is value
+of that type, finally it returns a slice merging the value in the slice. 
+
+	var x = [] int{1}
+	x = append(x, 2)
+	fmt.Println(x)
+
+capacity - It is the number of memory location reserved. Each time you append to a slice the capacity increases by one. When length becomes equal to capacity then things change. After length and capacity becoming equal to each other when you append to slice then in that case the Go runtime allocate a new slice of larger capacity which is twice to original slice.
+
+	var x []int
+	fmt.Println(x, len(x), cap(x))
+	x = append(x, 1)
+	fmt.Println(x, len(x), cap(x))
+	x = append(x, 2)
+	fmt.Println(x, len(x), cap(x))
+	x = append(x, 3)
+	fmt.Println(x, len(x), cap(x))
+	x = append(x, 4)
+	fmt.Println(x, len(x), cap(x))
+	x = append(x, 5)
+	fmt.Println(x, len(x), cap(x))
+
+[] 0 0
+[1] 1 1
+[1 2] 2 2
+[1 2 3] 3 4
+[1 2 3 4] 4 4
+[1 2 3 4 5] 5 8 // capacity doubles the previous slice 	
+----------------------------------------------------------
+
+Keyword "make" is used to declare slice
+ 
+x := make([]int, 5)
+This creates a slice of length 5 and capacity 5
+x := make([]int, 0, 10)
+This creates a slice of length 0 and capacity 10
+x := make([]int, 5, 7)
+This creates a slice of length 5 and capacity 7
+
+---------------------------------------------------------
+ 
+                        Slicing Slices 
+x := []int{ 1, 2, 3, 4}
+y := x[:2]   // Values in slice from the value at index after ':' is ignored
+for example :- 	The value of y is [1, 2]
+y := x[3:]   // Values in slice before the value at index before ':' is ignored
+for example :- 	The value of y is [4]
+ 
+----------------------------------------------------------
+
+                             Map
+
+It is written as Map[keyType]valueType
+
+	data := map[string]string{
+		"Nayan":   "17",
+		"Sangita": "39",
+		"Jagdish": "41",
+	}
+
+*** Reading from the maps and writing 
+
+	data := map[string]int{}
+
+	data["Nayan"] = 1
+	data["Sangita"] = 2
+	data["Jagdish"] = 3
+
+----------------------------------------------
+ 
+              Deleting Map
+
+delete(m , "Nayan")
+m is the name of map and "Nayan" is the value of key 
+
+
+----------------------------------------------
+
+The comma ok Idiom
+
+one , two := data["Nayan"]
+fmt.Println(one, two)
+
+//one will store the value of " data["Nayan"] " and two will store the boolean value of whether in the map the string is present or not. As you can see in this case the value is 1 and the string "Nayan" is present so boolean value of true will be returned.
+
+----------------------------------------------------------------
+
+                      Structs 
+
+When you have related data that you want to group together, you should define a struct
+
+type person struct  {
+    name string 
+    age int 
+    pet string 
+}
+
+
+julia := person {
+ "Julia",
+ 40,
+ "cat",
+}
+
+--------------------------------------------------------------
+
+
+ 
