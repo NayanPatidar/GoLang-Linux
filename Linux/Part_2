@@ -1,0 +1,52 @@
+		The Boot Process 
+It is everything from the user pressing the power on key of your pc to 
+the user interface getting operational completely.
+
+Power On --> BIOS --> Master Boot Record --> Boot Loader --> Kernel --> Initial RAM disk --> /sbin/init --> Cmd Shell using getty --> GUI 
+		      (MBR)		     (e.g GRUB) 		 - initramfs	   (parent process)			  (X Window)
+		
+____________________________________________________________________________________________________________________________________________
+
+BIOS - When the computer is powered on, the Basic Input/Output system starts the hardware, including the screen and keyboard, and tests the main memory. This process is also called the POST (Power on Self Test)
+** BIOS is stored on ROM - Read Only Memory chip on the motherboard. 
+____________________________________________________________________________________________________________________________________________
+
+Master Boot Record (MBR), EFI partition, and Boot Loader
+After the POST is completed, the system control passes from BIOS to MBR. When booting Linux, the boot loader is responsible for loading the kernel image and the initial RAM disk or filesystem (which contains some critical files and device drivers needed to start the system) into memory. 
+
+
+	BIOS BOOT
+	
+	  BIOS      ------------>    MBR      ----------> Boot Loader -----> Kernel -------> Operating System
+(Basic Input Output System)   (Master Boot Reader)
+
+	
+	UEFI BOOT
+	
+	  UEFI      ------------>    EFI      ----------> Kernel ---------> Operating System 		
+   (Unified Extensible 		(Boot Loader)
+    Firmware Interface)
+____________________________________________________________________________________________________________________________________________
+
+
+Boot Loader in Action - It has 2 stages:
+
+For system using BIOS/MBR method :- The boot loader resides at the first portion of the hard disk or MBR. It checks the partition table and finds the bootable partition. Once the bootable partition has been found then it searches for second stage of boot loader, for example GRUB,
+and loads it into the RAM (Random Access Memory). 	
+
+For system using UEFI method :- UEFI firmware reads its Boot Manager data to determine which UEFI application is to be launched and from where (i.e., from which disk and partition the EFI partition can be found). The firmware then launches the UEFI application, for example GRUB, as defined in the boot entry in the firmware's boot manager. This procedure is more complicated but more versatile than the older MBR methods.
+
+The second stage boot loader resides under /boot. A splash screen is displayed, which allows us to choose which operating system (OS) and/or kernel to boot. After the OS and kernel are selected, the boot loader loads the kernel of the operating system into RAM and passes control to it. Kernels are almost always compressed, so the first job they have is to uncompress themself. After this, it will check and analyze the system hardware and initialize any hardware device drivers built into the kernel.
+____________________________________________________________________________________________________________________________________________
+
+One systemd command (systemctl) is used for most basic tasks. While we have not yet talked about working at the command line, here is a brief listing of its use:
+
+-->
+   Starting, stopping, restarting a service (using httpd, the Apache web server, as an example) on a currently running system:
+   $ sudo systemctl start|stop|restart httpd.service
+ 
+   Enabling or disabling a system service from starting up at system boot:
+   $ sudo systemctl enable|disable httpd.service  
+
+   Checking on the status of a service:
+   $ sudo systemctl status httpd.service
