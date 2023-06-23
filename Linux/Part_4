@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------
+To create a file :-
+
+The first is to use echo repeatedly:
+
+$ echo line one > myfile
+$ echo line two >> myfile
+$ echo line three >> myfile
+
+The second way is to use cat combined with redirection:
+
+$ cat << EOF > myfile
+> line one
+> line two
+> line three
+> EOF
+$
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+nano is easy to use, and requires very little effort to learn. To open a file, type nano <filename> and press Enter. If the file does not exist, it will be created.
+
+
