@@ -1,0 +1,55 @@
+A Proxy Server is a stand in user to keep the real client Private
+
+But what is proxy
+
+It is a way to access the censored website through your ip. 
+
+     You -------------> Proxy Server ------------------> Website
+             Your ip                     ip from diff.                                                
+                                 country with access to website
+                                 
+
+Forward Proxy :- 
+It is used as guardian of the private networks. When these private networks want to fetch data from internet, forward proxy does it on their behalf.
+This blocks harmful websites and hides the ip address of the private network by using its own ipaddr instead.
+
+
+Private ip :- priv ip
+
+              priv ip
+Computer <------------------
+              priv ip      |           
+Computer <----------->  Forward Proxy <--------> Internet
+	      priv ip      |           Proxy ip
+Computer <------------------
+                           
+                           
+Reverse Proxy :- 
+It is used to create a single point of entry between the client and servers. Helps to the secure the servers from the hackers, hides the ipaddr of the server by using its own instead and it also acts as the loadbalancer by the distrubutng the traffic.
+
+
+
+HA Proxy (High Availibility):- Opensource software written in C. It is high performance, free and opensource software used by develpers to imporve website/application performance. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
