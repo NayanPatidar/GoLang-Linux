@@ -1,2 +1,2 @@
-# GoLang-Linux
+# GoLang-Linux-Others
 Notes are uploaded here!!
