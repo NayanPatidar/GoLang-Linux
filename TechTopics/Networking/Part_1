@@ -4,3 +4,14 @@ LAN - Local Area Network
 WAN - Wide Area Network
 
 Switch :- Two or More Computers
+
+OSI Model :- Application, Presentation, Session, Transport, Network, Datalink, Physical
+
+Application :- It is the top layer of the OSI model which interacts with the end users. It is not where the actual application lives but it provides the interface for the applications like web browsers. The single biggest interface.
+
+Presentation :- This layer translates the data between application and the network. This layer allows the two system to use different encoding for data and still pass data between them. Encrytion is also done at this layer.
+
+Session :- It manages, builds and terminates the connection between the systems. It uses APIs, NETBIOS. It usesAuthentication, Autherization and server management.
+
+Transport Layer :- It provides reliable data transfer through flow control, segmentation and error control. This layer trackes those segments that fail and retransmits them. It has 2 protocols - TCP and UDP
+
