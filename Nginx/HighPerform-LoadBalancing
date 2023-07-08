@@ -1,0 +1,3 @@
+When multiple copies of the same system are run, the load is distributed over them. As the load 
+increases, another copy of the system is brought online. This architecture technique is called
+horizontal scaling. Nginx does HTTP, TCP and UDP loadbalancing.
