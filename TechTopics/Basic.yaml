@@ -1,0 +1,62 @@
+# Key Value Pairs
+app: user-authentication
+port: 9000
+version: 1.7
+
+# Objects 
+Fruits:
+  Colour: Red
+  Name: Apple
+  PriceInKiloGram: 150
+
+# Lists
+Group:
+- Name: Nayan
+  Age: 17
+  College: SRM
+
+# Boolean is represented by true-false, yes-no, on-off
+Student: 
+- ObjectOne: ObjectOne
+- ObjectTwo: ObjectTwo
+  Present: yes
+
+# Real Kubernetes Config
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    apps: nginx
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: nginx-vol
+      mountPath: /usr/nginx/html
+  - name: sidecar-container
+    image: curlimages/curl
+    command: ["/bin/sh"]
+    args: ["-c", "echo Hello from the sidecar container; sleep 300"]
+
+# MultiLine String
+MultiLineString:
+  this is a multiline string
+  and this is the next line 
+  "next line"
+
+
+# Environment Variables (Used in pod configuration)
+
+- /bin/sh
+- -ec
+- >-
+  mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e 'SELECT 1'
+
+# Placeholders
+metadataTwo:
+  name: {{.Values.service.name}}
+
